@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fexle Agentforce Capability Register | v2.5</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+        
+        :root {
+            --brand-primary: #00A1E0;
+            --brand-dark: #032d60;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
+            color: #1e293b;
+            min-height: 100vh;
+        }
+
+        .bento-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .bento-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+            border-color: var(--brand-primary);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--brand-primary), var(--brand-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .action-btn {
+            @apply flex items-center gap-2 px-3 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider transition-all;
+        }
+
+        .btn-video { @apply bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white border border-blue-100; }
+        .btn-ppt { @apply bg-orange-50 text-orange-600 hover:bg-orange-600 hover:text-white border border-orange-100; }
+        .btn-folder { @apply bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white border border-emerald-100; }
+
+        .status-pill {
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #f8fafc; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 5px; }
+    </style>
+</head>
+<body class="p-4 md:p-12 lg:p-16">
+
+    <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <header class="mb-16 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+            <div class="space-y-4">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 text-blue-600 border border-blue-100 shadow-sm">
+                    <span class="relative flex h-2.5 w-2.5">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-blue-600"></span>
+                    </span>
+                    <span class="text-xs font-bold tracking-widest uppercase">Agentforce CoE • v2.5 Stable</span>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight gradient-text">Capability Register</h1>
+                <p class="text-slate-500 text-lg md:text-xl font-medium max-w-2xl leading-relaxed">Comprehensive Portfolio of Agentic AI Solutions & Industry Applications</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="text-right">
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Powered by</p>
+                    <p class="text-sm font-extrabold text-slate-800">Fexle Services CoE</p>
+                </div>
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-800 shadow-xl flex items-center justify-center text-white text-xl">
+                    <i class="fas fa-microchip"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- Primary Agent Personas -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+            
+            <!-- Service Agent -->
+            <div class="bento-card rounded-[32px] p-8 group">
+                <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-600 group-hover:text-white transition-all">
+                    <i class="fas fa-headset text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-4">Service Agent</h3>
+                <ul class="space-y-2 text-slate-500 text-sm font-medium flex-grow">
+                    <li><i class="fas fa-check text-blue-400 mr-2"></i>Automated Booking</li>
+                    <li><i class="fas fa-check text-blue-400 mr-2"></i>Product Search</li>
+                    <li><i class="fas fa-check text-blue-400 mr-2"></i>Headless Commerce</li>
+                    <li><i class="fas fa-check text-blue-400 mr-2"></i>Repair Service Logic</li>
+                </ul>
+                <div class="mt-8 pt-6 border-t border-slate-100 flex flex-wrap gap-2">
+                    <div class="action-btn btn-video cursor-default opacity-70" title="Support Excellence Demo">
+                        <i class="fas fa-play-circle text-lg"></i> Watch Demo
+                    </div>
+                    <a href="https://xoriant-my.sharepoint.com/:p:/g/personal/rohit_sharma_fexle_com/IQDRBa3uDGT4RJR34ewloQ4jAbTLANQLFIcZA67xGNrnkaY?e=9n9fPJ" target="_blank" class="action-btn btn-ppt">
+                        <i class="fas fa-file-powerpoint text-lg"></i> View Deck
+                    </a>
+                </div>
+            </div>
+
+            <!-- User Intel (Tall Card) -->
+            <div class="bento-card rounded-[32px] p-8 border-l-8 border-rose-500 group md:row-span-2">
+                <div class="w-12 h-12 bg-rose-50 text-rose-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-rose-500 group-hover:text-white transition-all">
+                    <i class="fas fa-user-shield text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-4">User Intel</h3>
+                <p class="text-slate-500 text-sm font-medium mb-6">Full User Lifecycle (Create, Clone, Freeze) & Automated Permissions.</p>
+                <ul class="space-y-3 text-slate-600 text-xs font-bold uppercase tracking-tight flex-grow">
+                    <li class="p-3 bg-white/50 rounded-lg">Zero-Manual Case Summaries</li>
+                    <li class="p-3 bg-white/50 rounded-lg">Verification Reporting</li>
+                    <li class="p-3 bg-white/50 rounded-lg">Email Resolution Drafting</li>
+                </ul>
+                <div class="mt-8 pt-6 border-t border-slate-100 flex flex-col gap-3">
+                    <a href="https://xoriant-my.sharepoint.com/:v:/g/personal/rohit_sharma_fexle_com/IQD1oj71AA_RSoTWkiSSH6hqAZpALWqbgGiQcLiy25-Urk0?e=wlsnFs" target="_blank" class="action-btn btn-video w-full justify-center">
+                        <i class="fas fa-play-circle text-lg"></i> User Intel Demo
+                    </a>
+                    <div class="text-[9px] font-bold text-slate-400 uppercase text-center">Reference Deck: Xoriant Agentforce Solutionsb - EAB.pptx</div>
+                </div>
+            </div>
+
+            <!-- Sales Agent -->
+            <div class="bento-card rounded-[32px] p-8 group">
+                <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-all">
+                    <i class="fas fa-chart-line text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-4">Sales Agent</h3>
+                <ul class="space-y-2 text-slate-500 text-sm font-medium flex-grow">
+                    <li><i class="fas fa-check text-indigo-400 mr-2"></i>Dynamic Proposals</li>
+                    <li><i class="fas fa-check text-indigo-400 mr-2"></i>Dealer Profiling</li>
+                    <li><i class="fas fa-check text-indigo-400 mr-2"></i>Auto Sales Pitches</li>
+                </ul>
+                <div class="mt-8 pt-6 border-t border-slate-100 flex flex-wrap gap-2">
+                    <a href="https://xoriant-my.sharepoint.com/:v:/g/personal/rohit_sharma_fexle_com/IQCdXOl2m4AzS7JNU25VoSNsAfugfAjEn_s7bkbUo1osVEk?e=9wSi2y" target="_blank" class="action-btn btn-video">
+                        <i class="fas fa-play-circle text-lg"></i> Watch Demo
+                    </a>
+                    <a href="https://xoriant-my.sharepoint.com/:p:/g/personal/rohit_sharma_fexle_com/IQDRBa3uDGT4RJR34ewloQ4jAbTLANQLFIcZA67xGNrnkaY?e=9n9fPJ" target="_blank" class="action-btn btn-ppt">
+                        <i class="fas fa-file-powerpoint text-lg"></i> View Deck
+                    </a>
+                </div>
+            </div>
+
+            <!-- Support Agent -->
+            <div class="bento-card rounded-[32px] p-8 group">
+                <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-amber-500 group-hover:text-white transition-all">
+                    <i class="fas fa-info-circle text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-4">Support Agent</h3>
+                <ul class="space-y-2 text-slate-500 text-sm font-medium flex-grow">
+                    <li><i class="fas fa-check text-amber-400 mr-2"></i>Knowledge Search</li>
+                    <li><i class="fas fa-check text-amber-400 mr-2"></i>Coverage Plans</li>
+                    <li><i class="fas fa-check text-amber-400 mr-2"></i>Client Acquisition</li>
+                </ul>
+                <div class="mt-8 pt-6 border-t border-slate-100 flex flex-wrap gap-2">
+                    <a href="https://xoriant-my.sharepoint.com/:p:/g/personal/rohit_sharma_fexle_com/IQDRBa3uDGT4RJR34ewloQ4jAbTLANQLFIcZA67xGNrnkaY?e=9n9fPJ" target="_blank" class="action-btn btn-ppt w-full justify-center">
+                        <i class="fas fa-file-powerpoint text-lg"></i> Client Acquisition Doc
+                    </a>
+                </div>
+            </div>
+
+            <!-- Commerce Agent (Wide Card) -->
+            <div class="bento-card rounded-[32px] p-8 group lg:col-span-2">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-emerald-500 group-hover:text-white transition-all">
+                            <i class="fas fa-shopping-cart text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Commerce Agent</h3>
+                        <ul class="grid grid-cols-2 gap-x-4 gap-y-2 text-slate-500 text-sm font-medium">
+                            <li><i class="fas fa-check text-emerald-400 mr-2"></i>Product Comparison</li>
+                            <li><i class="fas fa-check text-emerald-400 mr-2"></i>Guided Shopping</li>
+                            <li><i class="fas fa-check text-emerald-400 mr-2"></i>Bulk Purchase</li>
+                            <li><i class="fas fa-check text-emerald-400 mr-2"></i>Quick Add-to-Cart</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Holistic Intelligence Suite -->
+        <h2 class="text-2xl font-bold text-slate-800 mb-8 flex items-center gap-3">
+            <i class="fas fa-brain text-purple-500"></i> Holistic Intelligence Suite
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+            <div class="bento-card p-6 rounded-2xl flex items-start gap-4">
+                <div class="text-2xl text-purple-400 mt-1"><i class="fas fa-microphone-lines"></i></div>
+                <div>
+                    <h4 class="font-bold text-slate-800">Audio & Video Intelligence</h4>
+                    <p class="text-xs text-slate-500 mt-1">Converts conversations into summaries and action items.</p>
+                </div>
+            </div>
+            <div class="bento-card p-6 rounded-2xl flex items-start gap-4">
+                <div class="text-2xl text-blue-400 mt-1"><i class="fas fa-envelope-open-text"></i></div>
+                <div>
+                    <h4 class="font-bold text-slate-800">Email-to-Case Summary</h4>
+                    <p class="text-xs text-slate-500 mt-1">Structured summaries for long email threads.</p>
+                </div>
+            </div>
+            <div class="bento-card p-6 rounded-2xl flex items-start gap-4">
+                <div class="text-2xl text-green-400 mt-1"><i class="fas fa-magic"></i></div>
+                <div>
+                    <h4 class="font-bold text-slate-800">AI Case Resolution</h4>
+                    <p class="text-xs text-slate-500 mt-1">Recommends best resolutions based on historical data.</p>
+                </div>
+            </div>
+            <div class="bento-card p-6 rounded-2xl flex items-start gap-4">
+                <div class="text-2xl text-red-400 mt-1"><i class="fas fa-shield-halved"></i></div>
+                <div>
+                    <h4 class="font-bold text-slate-800">Warranty & Knowledge</h4>
+                    <p class="text-xs text-slate-500 mt-1">Natural language queries for warranty and specs.</p>
+                </div>
+            </div>
+            <div class="bento-card p-6 rounded-2xl flex items-start gap-4">
+                <div class="text-2xl text-orange-400 mt-1"><i class="fas fa-file-contract"></i></div>
+                <div>
+                    <h4 class="font-bold text-slate-800">Work Order Intelligence</h4>
+                    <p class="text-xs text-slate-500 mt-1">Technician job summaries from asset details.</p>
+                </div>
+            </div>
+            <a href="https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgDAV_xcLVA4RKVUXNzFfraBAfVpMA0OgX1-oq9nWM3hTyA?e=4Nl8R0" target="_blank" class="bento-card p-6 rounded-2xl flex items-start gap-4">
+                <div class="text-2xl text-pink-400 mt-1"><i class="fas fa-bullhorn"></i></div>
+                <div>
+                    <h4 class="font-bold text-slate-800">Campaign Intelligence</h4>
+                    <p class="text-xs text-slate-500 mt-1">Optimizes marketing with historical performance.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Industry Excellence Matrix -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+            <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-3">
+                <i class="fas fa-globe text-emerald-500"></i> Industry Excellence Matrix
+            </h2>
+            <a href="https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgBCHbQKrABDTbLgQ9hnTJYiATeBaJksYbB1XJB4ITH20eM?e=aYQLaE" target="_blank" class="action-btn btn-folder shadow-sm px-4">
+                <i class="fas fa-folder-open text-lg"></i> Access Domain Assets Folder
+            </a>
+        </div>
+        
+        <div class="bento-card rounded-[40px] overflow-hidden mb-20 border-none shadow-xl">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead class="bg-slate-900 text-white">
+                        <tr>
+                            <th class="px-8 py-5 text-xs font-bold uppercase tracking-widest">Industry Domain</th>
+                            <th class="px-8 py-5 text-xs font-bold uppercase tracking-widest">Partners / Clients</th>
+                            <th class="px-8 py-5 text-xs font-bold uppercase tracking-widest">Core Use Cases</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        <tr class="hover:bg-blue-50/50">
+                            <td class="px-8 py-4 font-bold">Banking & Finance</td>
+                            <td class="px-8 py-4 text-blue-600 font-semibold">
+                                <a href="https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgBkiGJ33eNVRKIctrQiy8hLAWeIl68UNOMGe_7YiAT-9j8?e=0njv6U" target="_blank">MasterCard</a>, 
+                                <a href="https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgBa8GQQWPq_TpQ9grgDnnxSAd_twKkIA6gMGFTLEBy1g4M?e=bE6eXw" target="_blank">CitiBank</a>, 
+                                <a href="https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgCBSE_FPsaDS7U1s3hW5CP6AXpdoBekW5JVF7ul3lZSThY?e=aCFoH1" target="_blank">State Street</a>
+                            </td>
+                            <td class="px-8 py-4 text-slate-500 text-sm">Disputes, Fraud Management, Loan/Credit Services, Portfolio Insights</td>
+                        </tr>
+                        <tr class="hover:bg-blue-50/50">
+                            <td class="px-8 py-4 font-bold">Retail / E-Commerce</td>
+                            <td class="px-8 py-4 text-blue-600 font-semibold">
+                                <a href="#">Neiman Marcus</a>, <a href="#">Walmart</a>, <a href="#">Costco</a>, <a href="#">Campos Coffee</a>
+                            </td>
+                            <td class="px-8 py-4 text-slate-500 text-sm">Recommendations, After-Sales (Reviews/Orders), Weekly Order Management</td>
+                        </tr>
+                        <tr class="hover:bg-blue-50/50">
+                            <td class="px-8 py-4 font-bold">Automobile / Marketing</td>
+                            <td class="px-8 py-4 text-blue-600 font-semibold">
+                                <a href="#">Ford (MSX)</a>, <a href="#">APF</a>
+                            </td>
+                            <td class="px-8 py-4 text-slate-500 text-sm">Repair Orders, Product Customization, Dream Car Booking, Service Excellence</td>
+                        </tr>
+                        <tr class="hover:bg-blue-50/50">
+                            <td class="px-8 py-4 font-bold">Manufacturing</td>
+                            <td class="px-8 py-4 text-blue-600 font-semibold"><a href="#">Copeland</a></td>
+                            <td class="px-8 py-4 text-slate-500 text-sm">SDR Automation, Lead Generation, Technical Product Enquiries</td>
+                        </tr>
+                        <tr class="hover:bg-blue-50/50">
+                            <td class="px-8 py-4 font-bold">Real Estate</td>
+                            <td class="px-8 py-4 text-blue-600 font-semibold"><a href="#">Invitation Homes</a></td>
+                            <td class="px-8 py-4 text-slate-500 text-sm">Site Visit Assistance, Tenant Services Management</td>
+                        </tr>
+                        <tr class="hover:bg-blue-50/50">
+                            <td class="px-8 py-4 font-bold">Healthcare</td>
+                            <td class="px-8 py-4 text-blue-600 font-semibold"><a href="#">United HealthCare</a></td>
+                            <td class="px-8 py-4 text-slate-500 text-sm">Coverage Search, Member Support, Plan Validation</td>
+                        </tr>
+                        <tr class="hover:bg-blue-50/50">
+                            <td class="px-8 py-4 font-bold">Telecommunications</td>
+                            <td class="px-8 py-4 text-blue-600 font-semibold"><a href="#">CISCO</a></td>
+                            <td class="px-8 py-4 text-slate-500 text-sm">Service & Connectivity, Device Troubleshooting</td>
+                        </tr>
+                        <tr class="hover:bg-blue-50/50">
+                            <td class="px-8 py-4 font-bold">Professional Services</td>
+                            <td class="px-8 py-4 text-blue-600 font-semibold"><a href="#">KPMG</a></td>
+                            <td class="px-8 py-4 text-slate-500 text-sm">Portfolio Management, Risk Assessment Intelligence</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Roadmap & Innovation -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20">
+            <div class="p-10 rounded-[40px] bg-gradient-to-br from-blue-900 to-indigo-950 text-white">
+                <span class="status-pill bg-blue-500/20 border border-blue-400/30 text-blue-300">Live Beta</span>
+                <h3 class="text-2xl font-bold mt-4 mb-4">Data Cloud Grounding</h3>
+                <p class="text-blue-100/80 text-sm leading-relaxed mb-6">Extracting precision signals from unstructured sources to provide factual responses in real-time.</p>
+                <div class="flex gap-2">
+                    <span class="px-3 py-1 bg-white/10 rounded text-[10px]">F&I METRICS</span>
+                    <span class="px-3 py-1 bg-white/10 rounded text-[10px]">DYNAMIC SUMMARIES</span>
+                </div>
+            </div>
+
+            <div class="p-10 rounded-[40px] bg-gradient-to-br from-orange-500 to-rose-600 text-white">
+                <span class="status-pill bg-white/20 border border-white/30 text-white">Coming Soon</span>
+                <h3 class="text-2xl font-bold mt-4 mb-4">Runtime Doc Scanning</h3>
+                <p class="text-orange-50/80 text-sm leading-relaxed mb-6">Real-time document upload and extraction during active agent sessions.</p>
+                <div class="bg-white/10 p-4 rounded-xl border border-white/10">
+                    <p class="text-xs italic">"The benchmark for transactional AI."</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="py-12 text-center border-t border-slate-100">
+            <p class="text-slate-400 font-bold text-xs tracking-widest uppercase">© 2024 Fexle Services CoE</p>
+        </footer>
+    </div>
+
+</body>
+</html>
