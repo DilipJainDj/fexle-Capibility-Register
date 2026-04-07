@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fexle Capability Register | Master Portfolio v4.0</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com/"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
@@ -12,6 +12,7 @@
         :root {
             --brand-primary: #00A1E0;
             --brand-dark: #032d60;
+            --live-green: #10b981;
         }
 
         body {
@@ -47,7 +48,7 @@
         .view-section.active { display: block; }
 
         .tech-pill {
-            @apply flex flex-col items-center justify-center p-4 rounded-3xl bg-white border border-slate-100 transition-all hover:shadow-md hover:-translate-y-1 group;
+            @apply flex flex-col items-center justify-center p-6 rounded-3xl bg-white border border-slate-100 transition-all hover:shadow-md hover:-translate-y-1 group;
         }
 
         .action-btn {
@@ -56,6 +57,32 @@
         .btn-demo { @apply bg-blue-50 text-blue-600 border-blue-100 hover:bg-blue-600 hover:text-white; }
         .btn-ppt { @apply bg-orange-50 text-orange-600 border-orange-100 hover:bg-orange-600 hover:text-white; }
         .btn-folder { @apply bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-900 hover:text-white; }
+
+        .live-pulse {
+            position: relative;
+        }
+        .live-pulse::after {
+            content: '';
+            position: absolute;
+            top: -2px; right: -2px;
+            width: 8px; height: 8px;
+            background: var(--live-green);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        .process-step {
+            @apply relative flex flex-col items-center text-center p-6 bg-white rounded-3xl border border-slate-100 shadow-sm transition-all hover:shadow-md h-full;
+        }
+        .process-connector {
+            @apply hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-slate-200;
+        }
 
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -66,8 +93,8 @@
     <!-- Sidebar Navigation -->
     <aside class="hidden md:flex flex-col w-72 bg-white border-r border-slate-100 p-6 sticky top-0 h-screen">
         <div class="flex items-center gap-3 mb-12 px-2">
-            <div class="w-10 h-10 bg-[#00A1E0] rounded-xl flex items-center justify-center text-white shadow-lg">
-                <i class="fas fa-microchip text-xl"></i>
+            <div class="w-10 h-10 bg-[#00A1E0] rounded-xl flex items-center justify-center text-white shadow-lg text-xl">
+                <i class="fas fa-microchip"></i>
             </div>
             <div>
                 <span class="font-black text-xl tracking-tight block">FEXLE</span>
@@ -77,264 +104,455 @@
 
         <nav class="space-y-2 flex-grow">
             <button onclick="showPage('home')" id="nav-home" class="nav-btn active-nav w-full flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition-all text-slate-500 hover:bg-blue-50">
-                <i class="fas fa-home w-5"></i> <span class="text-sm">Home</span>
+                <i class="fas fa-home w-5 text-sm"></i> <span class="text-sm">Home</span>
             </button>
             <button onclick="showPage('agentforce')" id="nav-agentforce" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition-all text-slate-500 hover:bg-blue-50">
-                <i class="fas fa-robot w-5"></i> <span class="text-sm">Agentforce Register</span>
+                <i class="fas fa-robot w-5 text-sm"></i> <span class="text-sm">Agentforce Register</span>
             </button>
             <button onclick="showPage('ai')" id="nav-ai" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition-all text-slate-500 hover:bg-blue-50">
-                <i class="fas fa-sparkles w-5"></i> <span class="text-sm">AI Register</span>
+                <i class="fas fa-sparkles w-5 text-sm"></i> <span class="text-sm">AI Register</span>
             </button>
         </nav>
 
         <div class="mt-auto p-6 bg-[#032d60] rounded-[28px] text-white">
             <div class="flex items-center gap-2 text-[#00A1E0] mb-2">
-                <i class="fas fa-globe"></i>
+                <i class="fas fa-globe text-xs"></i>
                 <span class="text-[10px] font-black uppercase tracking-widest">Global Ops</span>
             </div>
             <p class="text-xs font-medium text-slate-400 leading-relaxed">Serving 15+ vertical sectors with agentic intelligence.</p>
         </div>
     </aside>
 
-    <!-- Mobile Header -->
+    <!-- Mobile Navigation (Hidden on Tablet/Desktop) -->
     <div class="md:hidden flex items-center justify-between p-4 bg-white border-b border-slate-100 sticky top-0 z-50">
         <div class="flex items-center gap-2">
-            <div class="w-8 h-8 bg-[#00A1E0] rounded-lg flex items-center justify-center text-white">
-                <i class="fas fa-microchip"></i>
-            </div>
+            <div class="w-8 h-8 bg-[#00A1E0] rounded-lg flex items-center justify-center text-white"><i class="fas fa-microchip"></i></div>
             <span class="font-black tracking-tight">FEXLE</span>
         </div>
-        <button onclick="toggleMobileMenu()" class="p-2 text-slate-600">
-            <i class="fas fa-bars text-xl" id="menu-icon"></i>
-        </button>
+        <button onclick="toggleMobileMenu()" class="p-2 text-slate-600"><i class="fas fa-bars text-xl" id="menu-icon"></i></button>
     </div>
-
-    <!-- Mobile Menu Overlay -->
     <div id="mobile-menu" class="hidden md:hidden fixed inset-0 z-40 bg-white pt-20 p-6 flex flex-col gap-4">
-        <button onclick="showPage('home')" class="w-full flex items-center gap-4 p-4 rounded-2xl font-black uppercase text-xs text-slate-600 hover:bg-blue-50">
-            <i class="fas fa-home"></i> Home
-        </button>
-        <button onclick="showPage('agentforce')" class="w-full flex items-center gap-4 p-4 rounded-2xl font-black uppercase text-xs text-slate-600 hover:bg-blue-50">
-            <i class="fas fa-robot"></i> Agentforce Register
-        </button>
-        <button onclick="showPage('ai')" class="w-full flex items-center gap-4 p-4 rounded-2xl font-black uppercase text-xs text-slate-600 hover:bg-blue-50">
-            <i class="fas fa-sparkles"></i> AI Register
-        </button>
+        <button onclick="showPage('home')" class="w-full text-left p-4 font-bold text-slate-600 border-b">Home</button>
+        <button onclick="showPage('agentforce')" class="w-full text-left p-4 font-bold text-slate-600 border-b">Agentforce Register</button>
+        <button onclick="showPage('ai')" class="w-full text-left p-4 font-bold text-slate-600 border-b">AI Register</button>
     </div>
 
-    <!-- Main Content -->
-    <main class="flex-grow p-6 md:p-12 lg:p-16 max-w-[1440px] mx-auto w-full">
+    <!-- Main Content Area -->
+    <main class="flex-grow p-6 md:p-12 lg:p-16 max-w-[1440px] mx-auto w-full overflow-x-hidden">
         
-        <!-- PAGE: HOME -->
-        <div id="page-home" class="page-section active space-y-12">
-            <section class="relative overflow-hidden rounded-[48px] bg-[#032d60] p-8 md:p-16 text-white">
-                <div class="relative z-10 max-w-3xl space-y-6">
-                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#00A1E0]/20 border border-[#00A1E0]/30 text-[#00A1E0]">
-                        <i class="fas fa-microchip text-xs"></i>
-                        <span class="text-[10px] font-black uppercase tracking-[0.2em]">Agentforce CoE • 2026 Master Portfolio</span>
+        <!-- PAGE 1: HOME -->
+        <div id="page-home" class="page-section active space-y-12 animate-in fade-in duration-700">
+            <!-- Hero Section -->
+            <section class="relative overflow-hidden rounded-[48px] bg-slate-900 p-8 md:p-16 text-white shadow-2xl">
+                <div class="relative z-10 max-w-4xl space-y-8">
+                    <div class="flex gap-3 flex-wrap">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 shadow-sm">
+                            <i class="fab fa-salesforce text-sm"></i>
+                            <span class="text-[10px] font-black uppercase tracking-[0.2em]">Platinum Consulting Partner</span>
+                        </div>
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/20 border border-purple-400/30 text-purple-300 shadow-sm">
+                            <i class="fas fa-robot text-sm"></i>
+                            <span class="text-[10px] font-black uppercase tracking-[0.2em]">Agentforce Expert</span>
+                        </div>
                     </div>
-                    <h1 class="text-5xl md:text-7xl font-black leading-[1.1] tracking-tight">Capability <br><span class="text-[#00A1E0]">Register v4.0</span></h1>
-                    <p class="text-slate-400 text-lg md:text-xl font-medium max-w-xl leading-relaxed">Reimagining Salesforce with AI: 165+ AI Associates, 95+ AI Specialists, and 80% AI-Trained Talent delivering 30-50% productivity gains.</p>
+                    <h1 class="text-5xl md:text-7xl font-black leading-[1.1] tracking-tight">
+                        Reimagining <br>
+                        <span class="text-blue-400">Salesforce With AI</span>
+                    </h1>
+                    <p class="text-slate-400 text-lg md:text-xl font-medium max-w-2xl leading-relaxed">
+                        Enabling autonomous orchestration across Sales, Service, and Commerce with an elite team of 165+ AI Associates and 95+ Specialists.
+                    </p>
                     <div class="flex flex-wrap gap-4 pt-4">
-                        <button onclick="showPage('agentforce')" class="px-8 py-4 bg-[#00A1E0] hover:bg-sky-500 text-white rounded-2xl font-bold flex items-center gap-2 transition-all shadow-lg">
-                            Explore Agentforce <i class="fas fa-arrow-right ml-2"></i>
+                        <button onclick="showPage('agentforce')" class="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-bold flex items-center gap-2 transition-all shadow-lg group">
+                            Explore Agentforce <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
                         </button>
                         <button onclick="showPage('ai')" class="px-8 py-4 bg-white/10 hover:bg-white/20 text-white rounded-2xl font-bold border border-white/10 transition-all">
-                            AI Innovations
+                            GenAI Portfolio
                         </button>
                     </div>
                 </div>
-                <div class="absolute top-0 right-0 w-1/2 h-full hidden lg:block">
-                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#00A1E0]/20 blur-[120px] rounded-full"></div>
-                    <div class="absolute bottom-10 right-10 flex gap-12 opacity-50 text-white">
+
+                <div class="absolute top-0 right-0 w-1/2 h-full hidden lg:block overflow-hidden pointer-events-none">
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/20 blur-[120px] rounded-full"></div>
+                    <div class="absolute inset-0 flex flex-col justify-center items-end pr-16 space-y-8 opacity-70">
                         <div class="text-right">
-                            <div class="text-5xl font-black">165</div>
-                            <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-2">AI Associates</div>
+                            <div class="text-6xl font-black text-white">165</div>
+                            <div class="text-xs font-bold text-blue-400 uppercase tracking-widest mt-1">Salesforce AI Associates</div>
                         </div>
                         <div class="text-right">
-                            <div class="text-5xl font-black">50%</div>
-                            <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-2">Productivity Gain</div>
+                            <div class="text-6xl font-black text-white">95</div>
+                            <div class="text-xs font-bold text-blue-400 uppercase tracking-widest mt-1">Salesforce AI Specialists</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-6xl font-black text-white">50%</div>
+                            <div class="text-xs font-bold text-blue-400 uppercase tracking-widest mt-1">Multi Industry Architecture</div>
                         </div>
                     </div>
                 </div>
             </section>
 
+            <!-- Salesforce Practice Overview Stats -->
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-white p-8 rounded-[32px] border border-slate-100 shadow-sm">
-                    <i class="fas fa-layer-group text-[#00A1E0] mb-3 text-xl"></i>
-                    <div class="text-4xl font-black">60+</div>
-                    <div class="text-xs font-bold text-slate-400 uppercase mt-1 tracking-wider">Capabilities</div>
+                <div class="bg-white p-8 rounded-[32px] border border-slate-100 shadow-sm group hover:border-[#00A1E0] transition-colors">
+                    <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-4"><i class="fas fa-user-tie"></i></div>
+                    <div class="text-4xl font-black text-slate-900">250+</div>
+                    <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Consultants</div>
                 </div>
-                <div class="bg-white p-8 rounded-[32px] border border-slate-100 shadow-sm">
-                    <i class="fas fa-globe text-[#00A1E0] mb-3 text-xl"></i>
-                    <div class="text-4xl font-black">15+</div>
-                    <div class="text-xs font-bold text-slate-400 uppercase mt-1 tracking-wider">Verticals</div>
+                <div class="bg-white p-8 rounded-[32px] border border-slate-100 shadow-sm group hover:border-[#00A1E0] transition-colors">
+                    <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center mb-4"><i class="fas fa-briefcase"></i></div>
+                    <div class="text-4xl font-black text-slate-900">150+</div>
+                    <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Projects Delivered</div>
                 </div>
-                <div class="bg-white p-8 rounded-[32px] border border-slate-100 shadow-sm">
-                    <i class="fas fa-users text-[#00A1E0] mb-3 text-xl"></i>
-                    <div class="text-4xl font-black">25+</div>
-                    <div class="text-xs font-bold text-slate-400 uppercase mt-1 tracking-wider">Global Clients</div>
+                <div class="bg-white p-8 rounded-[32px] border border-slate-100 shadow-sm group hover:border-[#00A1E0] transition-colors">
+                    <div class="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center mb-4"><i class="fas fa-certificate"></i></div>
+                    <div class="text-4xl font-black text-slate-900">802+</div>
+                    <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Certifications</div>
                 </div>
-                <div class="bg-white p-8 rounded-[32px] border border-slate-100 shadow-sm">
-                    <i class="fas fa-chart-line text-[#00A1E0] mb-3 text-xl"></i>
-                    <div class="text-4xl font-black">80%</div>
-                    <div class="text-xs font-bold text-slate-400 uppercase mt-1 tracking-wider">Trained Talent</div>
+                <div class="bg-white p-8 rounded-[32px] border border-slate-100 shadow-sm group hover:border-[#00A1E0] transition-colors">
+                    <div class="w-10 h-10 bg-rose-50 text-rose-600 rounded-xl flex items-center justify-center mb-4"><i class="fas fa-star"></i></div>
+                    <div class="text-4xl font-black text-slate-900">5/5</div>
+                    <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Average CSAT</div>
                 </div>
             </div>
+
+            <!-- Value Delivery & Cloud Matrix -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white p-10 rounded-[40px] border border-slate-100 shadow-sm space-y-6">
+                    <h3 class="text-2xl font-black text-slate-900 uppercase tracking-widest flex items-center gap-3">
+                        <i class="fas fa-award text-blue-500"></i> Value Delivered
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-5 bg-blue-50 rounded-2xl border border-blue-100">
+                            <div class="text-3xl font-black text-blue-600">30–50%</div>
+                            <p class="text-[10px] font-bold text-blue-400 uppercase tracking-widest mt-1">Productivity Boost</p>
+                        </div>
+                        <div class="p-5 bg-emerald-50 rounded-2xl border border-emerald-100">
+                            <div class="text-3xl font-black text-emerald-600">24/7</div>
+                            <p class="text-[10px] font-bold text-emerald-400 uppercase tracking-widest mt-1">Autonomous Service</p>
+                        </div>
+                        <div class="p-5 bg-indigo-50 rounded-2xl border border-indigo-100">
+                            <div class="text-3xl font-black text-indigo-600">Accelerate</div>
+                            <p class="text-[10px] font-bold text-indigo-400 uppercase tracking-widest mt-1">Revenue Growth</p>
+                        </div>
+                        <div class="p-5 bg-rose-50 rounded-2xl border border-rose-100">
+                            <div class="text-3xl font-black text-rose-600">Reduce</div>
+                            <p class="text-[10px] font-bold text-rose-400 uppercase tracking-widest mt-1">Operational Costs</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#032d60] p-10 rounded-[40px] text-white space-y-6 shadow-xl">
+                    <h3 class="text-2xl font-black uppercase tracking-widest flex items-center gap-3">
+                        <i class="fas fa-cloud text-[#00A1E0]"></i> Cloud Offerings
+                    </h3>
+                    <div class="grid grid-cols-3 gap-6">
+                        <div class="flex flex-col items-center gap-2 text-center">
+                            <i class="fas fa-mouse-pointer text-xl text-blue-400 mb-1"></i>
+                            <span class="text-[10px] font-black uppercase tracking-tighter">Sales Cloud</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 text-center">
+                            <i class="fas fa-headset text-xl text-blue-400 mb-1"></i>
+                            <span class="text-[10px] font-black uppercase tracking-tighter">Service Cloud</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 text-center">
+                            <i class="fas fa-users text-xl text-blue-400 mb-1"></i>
+                            <span class="text-[10px] font-black uppercase tracking-tighter">Experience</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 text-center">
+                            <i class="fas fa-file-invoice-dollar text-xl text-blue-400 mb-1"></i>
+                            <span class="text-[10px] font-black uppercase tracking-tighter">CPQ</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 text-center">
+                            <i class="fas fa-shopping-cart text-xl text-blue-400 mb-1"></i>
+                            <span class="text-[10px] font-black uppercase tracking-tighter">Commerce</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 text-center">
+                            <i class="fas fa-bullhorn text-xl text-blue-400 mb-1"></i>
+                            <span class="text-[10px] font-black uppercase tracking-tighter">Pardot</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Support Mechanics Section -->
+            <section class="space-y-8">
+                <div class="flex items-center gap-4">
+                    <h2 class="text-2xl font-black text-slate-900 uppercase tracking-widest">How Agentforce Support</h2>
+                    <div class="h-px flex-grow bg-slate-200"></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-8 rounded-[40px] border border-slate-100 shadow-sm group hover:border-[#00A1E0] transition-all">
+                        <div class="w-12 h-12 bg-sky-50 text-sky-600 rounded-2xl flex items-center justify-center mb-6"><i class="fas fa-eye text-xl"></i></div>
+                        <h4 class="text-lg font-black text-slate-800 mb-3 uppercase tracking-tighter leading-tight">Reads & Understands</h4>
+                        <p class="text-[13px] text-slate-500 leading-relaxed font-medium">Deeply connects to Salesforce data ecosystems to interpret requests and automatically trigger complex workflows based on strict enterprise governance.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-[40px] border border-slate-100 shadow-sm group hover:border-[#00A1E0] transition-all">
+                        <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center mb-6"><i class="fas fa-brain text-xl"></i></div>
+                        <h4 class="text-lg font-black text-slate-800 mb-3 uppercase tracking-tighter leading-tight">Interprets & Classifies</h4>
+                        <p class="text-[13px] text-slate-500 leading-relaxed font-medium">Leverages advanced LLMs to interpret unstructured communication (cases, forms, chats), accurately routing and updating CRM records in near real-time.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-[40px] border border-slate-100 shadow-sm group hover:border-[#00A1E0] transition-all">
+                        <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mb-6"><i class="fas fa-cogs text-xl"></i></div>
+                        <h4 class="text-lg font-black text-slate-800 mb-3 uppercase tracking-tighter leading-tight">Automates & Orchestrates</h4>
+                        <p class="text-[13px] text-slate-500 leading-relaxed font-medium">Drives autonomous orchestration of end-to-end processes: creating entities, notifying stakeholders, and escalating priority actions without manual touch.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Ecosystem Technologies -->
+            <section class="py-12 px-8 bg-white rounded-[48px] border border-slate-100 shadow-sm">
+                <div class="text-center space-y-2 mb-12">
+                    <h2 class="text-2xl font-black text-slate-900 uppercase tracking-[0.2em]">Our Capabilities & Ecosystem</h2>
+                    <p class="text-slate-400 text-[10px] font-bold uppercase tracking-[0.3em]">Foundation Technologies</p>
+                </div>
+                <div class="flex flex-wrap justify-center items-center gap-12">
+                    <div class="flex items-center gap-3 grayscale hover:grayscale-0 transition-all"><i class="fab fa-salesforce text-4xl text-blue-500"></i><span class="font-black text-slate-800 uppercase text-xs">Salesforce</span></div>
+                    <div class="flex items-center gap-3 grayscale hover:grayscale-0 transition-all"><i class="fas fa-robot text-4xl text-slate-800"></i><span class="font-black text-slate-800 uppercase text-xs">OpenAI</span></div>
+                    <div class="flex items-center gap-3 grayscale hover:grayscale-0 transition-all"><i class="fas fa-brain text-4xl text-blue-400"></i><span class="font-black text-slate-800 uppercase text-xs">Google Gemini</span></div>
+                    <div class="flex items-center gap-3 grayscale hover:grayscale-0 transition-all"><i class="fas fa-bolt text-4xl text-orange-500"></i><span class="font-black text-slate-800 uppercase text-xs">Anthropic</span></div>
+                    <div class="flex items-center gap-3 grayscale hover:grayscale-0 transition-all"><i class="fas fa-snowflake text-4xl text-sky-400"></i><span class="font-black text-slate-800 uppercase text-xs">Snowflake</span></div>
+                    <div class="flex items-center gap-3 grayscale hover:grayscale-0 transition-all"><i class="fab fa-aws text-4xl text-orange-600"></i><span class="font-black text-slate-800 uppercase text-xs">AWS Bedrock</span></div>
+                    <div class="flex items-center gap-3 grayscale hover:grayscale-0 transition-all"><i class="fab fa-microsoft text-4xl text-blue-700"></i><span class="font-black text-slate-800 uppercase text-xs">Azure AI</span></div>
+                </div>
+            </section>
         </div>
 
-        <!-- PAGE: AGENTFORCE REGISTER -->
+        <!-- PAGE 2: AGENTFORCE REGISTER -->
         <div id="page-agentforce" class="page-section space-y-12">
             <header class="space-y-4">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
                     <div class="space-y-2">
                         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-[10px] font-black uppercase tracking-widest border border-blue-100">Agentforce Partner Network</div>
                         <h1 class="text-4xl md:text-6xl font-black text-slate-900 tracking-tight">Agentforce Register</h1>
-                        <p class="text-slate-500 font-medium text-lg">Comprehensive repository of pitch decks, demos, and case assets.</p>
                     </div>
-                    <img src="https://www.fexle.com/assets/images/fexle-logo.svg" alt="Fexle" class="h-10 opacity-40 mb-2">
+                    <div class="flex bg-slate-100 p-1 rounded-2xl shadow-inner">
+                        <button onclick="toggleAgentSubView('register')" id="btn-af-register" class="px-6 py-2 rounded-xl text-xs font-black uppercase tracking-widest bg-white shadow-sm text-slate-900 transition-all">Register</button>
+                        <button onclick="toggleAgentSubView('process')" id="btn-af-process" class="px-6 py-2 rounded-xl text-xs font-black uppercase tracking-widest text-slate-400 transition-all">Our Process</button>
+                    </div>
                 </div>
             </header>
 
-            <div class="flex justify-center gap-4">
-                <button onclick="showView('agent-view')" id="btn-agent-view" class="px-8 py-3 rounded-2xl font-black text-xs uppercase tracking-widest transition-all bg-slate-900 text-white shadow-xl">By Agent Type</button>
-                <button onclick="showView('industry-view')" id="btn-industry-view" class="px-8 py-3 rounded-2xl font-black text-xs uppercase tracking-widest transition-all bg-white text-slate-400 border border-slate-100">By Industry</button>
+            <!-- SUBVIEW: REGISTER -->
+            <div id="af-register-view" class="space-y-12">
+                <div class="flex justify-center gap-4">
+                    <button onclick="showView('agent-view')" id="btn-agent-view" class="px-8 py-3 rounded-2xl font-black text-xs uppercase tracking-widest transition-all bg-slate-900 text-white shadow-xl">By Agent Type</button>
+                    <button onclick="showView('industry-view')" id="btn-industry-view" class="px-8 py-3 rounded-2xl font-black text-xs uppercase tracking-widest transition-all bg-white text-slate-400 border border-slate-100">By Industry</button>
+                </div>
+                
+                <div id="agent-view" class="view-section active space-y-16">
+                    <div id="tables-container"></div>
+                </div>
+                <div id="industry-view" class="view-section space-y-12">
+                    <div id="industry-cards-container" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
+                </div>
             </div>
 
-            <!-- VIEW 1: AGENT TYPE -->
-            <div id="agent-view" class="view-section active space-y-16 pb-20">
-                <div id="tables-container" class="space-y-16"></div>
-            </div>
-
-            <!-- VIEW 2: INDUSTRY -->
-            <div id="industry-view" class="view-section space-y-12 pb-20">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="industry-cards-container"></div>
+            <!-- SUBVIEW: PROCESS (Development Lifecycle) -->
+            <div id="af-process-view" class="hidden space-y-16 py-10">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-y-12 gap-x-6">
+                    <div class="process-step"><div class="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-black mb-4">1</div><h5 class="text-xs font-black uppercase mb-2 tracking-widest">Req. Gathering</h5><p class="text-[10px] text-slate-500">Business intent mapping and user persona identification.</p><div class="process-connector"></div></div>
+                    <div class="process-step"><div class="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-black mb-4">2</div><h5 class="text-xs font-black uppercase mb-2 tracking-widest">User Journey</h5><p class="text-[10px] text-slate-500">Happy path mapping for entry points (UI/Console/Experience).</p><div class="process-connector"></div></div>
+                    <div class="process-step"><div class="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-black mb-4">3</div><h5 class="text-xs font-black uppercase mb-2 tracking-widest">Architecture</h5><p class="text-[10px] text-slate-500">Instructions, Topics, and Actions connected to Flows/Apex.</p><div class="process-connector"></div></div>
+                    <div class="process-step"><div class="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-black mb-4">4</div><h5 class="text-xs font-black uppercase mb-2 tracking-widest">Topic Planning</h5><p class="text-[10px] text-slate-500">Defining intent clusters and required data inputs.</p><div class="process-connector"></div></div>
+                    <div class="process-step"><div class="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-black mb-4">5</div><h5 class="text-xs font-black uppercase mb-2 tracking-widest">Action Logic</h5><p class="text-[10px] text-slate-500">Implementing autolaunched flows with strict validation rules.</p></div>
+                    <div class="process-step"><div class="w-10 h-10 bg-purple-600 text-white rounded-full flex items-center justify-center font-black mb-4">6</div><h5 class="text-xs font-black uppercase mb-2 tracking-widest">Guardrails</h5><p class="text-[10px] text-slate-500">Safety mechanisms, permission checks, and read-only defaults.</p><div class="process-connector"></div></div>
+                    <div class="process-step"><div class="w-10 h-10 bg-purple-600 text-white rounded-full flex items-center justify-center font-black mb-4">7</div><h5 class="text-xs font-black uppercase mb-2 tracking-widest">Build Phase</h5><p class="text-[10px] text-slate-500">Sandbox implementation and topic-action pair mapping.</p><div class="process-connector"></div></div>
+                    <div class="process-step"><div class="w-10 h-10 bg-purple-600 text-white rounded-full flex items-center justify-center font-black mb-4">8</div><h5 class="text-xs font-black uppercase mb-2 tracking-widest">Testing Phase</h5><p class="text-[10px] text-slate-500">UAT validating intent detection and functional logic.</p><div class="process-connector"></div></div>
+                    <div class="process-step"><div class="w-10 h-10 bg-purple-600 text-white rounded-full flex items-center justify-center font-black mb-4">9</div><h5 class="text-xs font-black uppercase mb-2 tracking-widest">Deployment</h5><p class="text-[10px] text-slate-500">Migration to Production via DevOps Center or CLI tools.</p><div class="process-connector"></div></div>
+                    <div class="process-step"><div class="w-10 h-10 bg-purple-600 text-white rounded-full flex items-center justify-center font-black mb-4">10</div><h5 class="text-xs font-black uppercase mb-2 tracking-widest">Monitoring</h5><p class="text-[10px] text-slate-500">Continuous refinement based on usage patterns and feedback.</p></div>
+                </div>
             </div>
         </div>
 
-        <!-- PAGE: AI REGISTER -->
+        <!-- PAGE 3: AI REGISTER -->
         <div id="page-ai" class="page-section space-y-12">
             <header class="space-y-4">
-                <h1 class="text-4xl font-black text-slate-900 tracking-tight">AI Capability Register</h1>
-                <p class="text-slate-500 max-w-2xl font-medium">Next-gen multi-channel transformation, medical assistants, and automated code remediation.</p>
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+                    <div class="space-y-2">
+                        <h1 class="text-4xl md:text-6xl font-black text-slate-900 tracking-tight">AI Capability Register</h1>
+                    </div>
+                    <div class="flex bg-slate-100 p-1 rounded-2xl shadow-inner">
+                        <button onclick="toggleAiSubView('register')" id="btn-ai-register" class="px-6 py-2 rounded-xl text-xs font-black uppercase tracking-widest bg-white shadow-sm text-slate-900 transition-all">Portfolio</button>
+                        <button onclick="toggleAiSubView('playbook')" id="btn-ai-playbook" class="px-6 py-2 rounded-xl text-xs font-black uppercase tracking-widest text-slate-400 transition-all">Playbook</button>
+                    </div>
+                </div>
             </header>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="ai-cards-container"></div>
+            <div id="ai-register-view" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
+            <div id="ai-playbook-view" class="hidden space-y-16 py-10">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-white">
+                    <div class="p-8 bg-slate-900 rounded-[32px] border border-white/10 shadow-xl">
+                        <h4 class="text-lg font-black uppercase mb-4 text-blue-400">01 — Intake</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">Risk classification, ROI hypothesis alignment, and sizing analysis (1-3 days).</p>
+                    </div>
+                    <div class="p-8 bg-slate-900 rounded-[32px] border border-white/10 shadow-xl">
+                        <h4 class="text-lg font-black uppercase mb-4 text-blue-400">02 — Design</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">Solution architecture and multi-modal model family selection memo (1-2 weeks).</p>
+                    </div>
+                    <div class="p-8 bg-slate-900 rounded-[32px] border border-white/10 shadow-xl">
+                        <h4 class="text-lg font-black uppercase mb-4 text-blue-400">03 — MVP Build</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">Prompt engineering, RAG orchestration, and evaluation datasets (2-4 weeks).</p>
+                    </div>
+                    <div class="p-8 bg-slate-900 rounded-[32px] border border-white/10 shadow-xl">
+                        <h4 class="text-lg font-black uppercase mb-4 text-blue-400">04 — Hardening</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">Adversarial testing, performance tuning, and NIST RMF compliance (2-6 weeks).</p>
+                    </div>
+                    <div class="p-8 bg-slate-900 rounded-[32px] border border-white/10 shadow-xl">
+                        <h4 class="text-lg font-black uppercase mb-4 text-blue-400">05 — Scale</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">Production rollout, feedback orchestration, and continuous drift monitoring.</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <footer class="mt-24 pt-12 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-6 opacity-40">
-            <div class="flex items-center gap-2 grayscale">
-                <span class="font-black text-lg tracking-tight">FEXLE</span>
-                <span class="text-xs font-bold text-slate-400 tracking-widest">© 2026 CoE STRATEGIC MATRIX v4.0</span>
-            </div>
+        <footer class="mt-24 pt-12 border-t border-slate-100 opacity-40">
+            <span class="font-black text-lg tracking-tight">FEXLE</span>
+            <span class="text-xs font-bold text-slate-400 ml-4">© 2026 CoE MASTER STRATEGY v4.0</span>
         </footer>
     </main>
 
     <script>
         // --- MASTER DATASET ---
         const AGENTFORCE_DATA = [
-            // SERVICE AGENTS
-            { id: 'af-healthsight', organization: 'Xoriant / Healthsight', category: 'Service Agent', industry: 'Healthcare', purpose: 'End-to-End Health Claim Processing', useCase: 'Automated claim intake, fraud detection, and instant status tracking for members.', highlights: ['45% faster cycle', '99% paper reduction'], demoUrl: 'https://youtu.be/81laGWPlGc4?si=5JQHIPgI4tYWDPCK', pptUrl: '#', folderUrl: '#' },
-            { id: 'af-1', organization: 'Siemens', category: 'Service Agent', industry: 'Manufacturing', purpose: 'L1 Support Excellence', useCase: 'Technical resolution drafting & L1 triage automation.', highlights: ['Automated triage', 'Tone detection'], folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgCF2XVJzHaJQZhwIm0hQBZEAds1j-W_Bht31S7fKJJiflY?e=ageo29', demoUrl: 'https://xoriant-my.sharepoint.com/:v:/g/personal/rohit_sharma_fexle_com/IQCk_TJCVjZESpQyOBrN5X6rAYh166zTfVKFSkEUxFyJLJ4?e=wpdc5B', pptUrl: 'https://xoriant-my.sharepoint.com/:p:/g/personal/rohit_sharma_fexle_com/IQDRBa3uDGT4RJR34ewloQ4jAbTLANQLFIcZA67xGNrnkaY?e=9n9fPJ' },
-            { id: 'af-2', organization: 'Carrier', category: 'Service Agent', industry: 'Manufacturing', purpose: 'Resolution & Summarization', useCase: 'Historical grounding for case resolution; 80% triage time reduction.', highlights: ['AI case resolution', 'Precision grounding'], folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgAktQy4CM1gTp4ct5i0ytUhAXZ_cxDACIEwG33fxpKzudk?e=sRxbzI' },
-            { id: 'af-3', organization: 'Cisco', category: 'Service Agent', industry: 'Telecom', purpose: 'Device Troubleshooting', useCase: 'Step-by-step connectivity support and subscription management.', highlights: ['Connectivity support', 'Service visibility'], folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgCvdKXY2_MXRpS3hoDyYWieARsVFtIa3Hi8bFKuYr3vUxQ?e=7Zqkes' },
-            { id: 'af-4', organization: 'Assurant', category: 'Service Agent', industry: 'Automobile', purpose: 'Claims Transformation', useCase: 'Converts unstructured RO docs to data using OCR and AI fuzzy mapping.', highlights: ['OCR document extraction', 'Claim triage'], folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgBjhCMlM_UtR6KYsuQPawbCAc7U8aPoTReh_UXoFZ31460?e=MlCezS' },
-            { id: 'af-5', organization: 'Ford MSX', category: 'Service Agent', industry: 'Automobile', purpose: 'Automated Repair Orders', useCase: 'End-to-end RO filing, intelligent estimations, and scheduling.', highlights: ['End-to-end filing', 'Intelligent discounting'], folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgBLTKp8en-fT7IrjwFt5KJrAc--2TND6yNE77-9Be1auds?e=zqzKwO' },
-            { id: 'af-6', organization: 'Citi Bank', category: 'Service Agent', industry: 'Banking & Finance', purpose: 'Loan & Credit Onboarding', useCase: 'Customer ID logic, automated loan applications, and status tracking.', highlights: ['Loan applications', 'Status tracking'], folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgBa8GQQWPq_TpQ9grgDnnxSAd_twKkIA6gMGFTLEBy1g4M?e=bE6eXw' },
-            { id: 'af-7', organization: 'MasterCard', category: 'Service Agent', industry: 'Banking & Finance', purpose: 'Lounge & Fraud Assist', useCase: 'OTP-based lounge booking and automated dispute reporting.', highlights: ['OTP authentication', 'Dispute reporting'], folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgBkiGJ33eNVRKIctrQiy8hLAWeIl68UNOMGe_7YiAT-9j8?e=0njv6U' },
-            { id: 'af-8', organization: 'State Street', category: 'Service Agent', industry: 'Banking & Finance', purpose: 'Trade Genie Insights', useCase: 'Real-time portfolio holdings, performance metrics, and call scheduling.', highlights: ['Portfolio metrics', 'Manager scheduling'], folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgCBSE_FPsaDS7U1s3hW5CP6AXpdoBekW5JVF7ul3lZSThY?e=aCFoH1' },
-            { id: 'af-9-serv', organization: 'Walmart', category: 'Service Agent', industry: 'Retail', purpose: 'ServiceSync Tracking', useCase: 'Complaint tracking & store discovery.', highlights: ['ServiceSync', 'Complaint tracking'], folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgDqTFMnEszbSpTDzWqX5bBCAbs9N8hu0qPGPW6fkgI29rs?e=c45iHM' },
-            { id: 'af-11-serv', organization: 'Invitation Homes', category: 'Service Agent', industry: 'Real Estate', purpose: 'Site Visit Booking', useCase: 'Site visit booking & automated floor plan delivery.', highlights: ['Site visit booking', 'Floor plan delivery'], folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgBRdufIJzSaRav3Zd0rSXk6Acb01HD3axcl9tGDNxLfzN8?e=c6wLWe' },
+            // HEALTHCARE
+            { id: 'af-healthsight', organization: 'Healthsight', category: 'Service Agent', industry: 'Healthcare', purpose: 'Health Claim Management', useCase: 'Automating the end-to-end claim lifecycle—from intake to adjudication—reducing processing time by 45% through Salesforce-native AI automation.', status: 'Live', demoUrl: 'https://youtu.be/81laGWPlGc4?si=5JQHIPgI4tYWDPCK', folderUrl: '#' },
+            { id: 'af-united', organization: 'United Healthcare', category: 'Service Agent', industry: 'Healthcare', purpose: 'Member Support', useCase: 'Smart assistance for coverage search, plan validation, and real-time eligibility checks using autonomous member guidance.', status: 'Deployed', folderUrl: '#' },
+            
+            // BANKING & FINANCE
+            { id: 'af-wealthview', organization: 'Wealthview AI', category: 'Sales Agent', industry: 'Banking & Finance', purpose: 'Portfolio Advisor', useCase: 'Bespoke financial insights for wealth managers—providing real-time portfolio drift alerts and personalized recommendations via Financial Cloud.', status: 'Live', demoUrl: 'https://youtu.be/M5z9BgtvDBo?si=tsq9riqioFEbZuby', folderUrl: '#' },
+            { id: 'af-mastercard', organization: 'MasterCard', category: 'Service Agent', industry: 'Banking & Finance', purpose: 'Fraud & Lounge Assist', useCase: 'OTP-authenticated lounge booking and automated dispute reporting with real-time fraud pattern recognition logic.', status: 'Deployed', folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgBkiGJ33eNVRKIctrQiy8hLAWeIl68UNOMGe_7YiAT-9j8?e=0njv6U' },
+            { id: 'af-citi', organization: 'Citi Bank', category: 'Service Agent', industry: 'Banking & Finance', purpose: 'Loan & Credit Services', useCase: 'Customer ID logic and automated loan application processing with integrated real-time status tracking for faster onboarding.', status: 'Deployed', folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgBa8GQQWPq_TpQ9grgDnnxSAd_twKkIA6gMGFTLEBy1g4M?e=bE6eXw' },
+            { id: 'af-statestreet', organization: 'State Street', category: 'Service Agent', industry: 'Banking & Finance', purpose: 'Trade Genie', useCase: 'Dynamic portfolio metrics and account manager scheduling powered by real-time holdings analysis and performance data.', status: 'Deployed', folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgCBSE_FPsaDS7U1s3hW5CP6AXpdoBekW5JVF7ul3lZSThY?e=aCFoH1' },
+            { id: 'af-kpmg-sales', organization: 'KPMG', category: 'Sales Agent', industry: 'Banking & Finance', purpose: 'Asset Mind Advisor', useCase: 'Strategic market insights advisor identifying diversification gaps and risk shifts for optimized asset management portfolio planning.', status: 'Deployed', folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgAG5PVGeQ4qRKzdWlItUP5JAXbBJOP2EW8zqqwyWJwiR5g?e=QfjXSg' },
 
-            // SALES AGENTS
-            { id: 'af-wealthview', organization: 'Xoriant / Wealthview', category: 'Sales Agent', industry: 'Banking & Finance', purpose: 'Wealth Management Advisor', useCase: 'Dynamic portfolio insights and personalized recommendations via Financial Cloud.', highlights: ['Real-time drift alerts', 'Bespoke portfolio logic'], demoUrl: 'https://youtu.be/M5z9BgtvDBo?si=tsq9riqioFEbZuby', pptUrl: '#', folderUrl: '#' },
-            { id: 'af-9-sales', organization: 'Siemens', category: 'Sales Agent', industry: 'Manufacturing', purpose: 'Sales Intelligence', useCase: 'Tailored strategic snapshots for SDRs, Managers, and Directors.', highlights: ['Pipeline hygiene', 'Strategic moves'], folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgCF2XVJzHaJQZhwIm0hQBZEAds1j-W_Bht31S7fKJJiflY?e=ageo29', demoUrl: 'https://xoriant-my.sharepoint.com/:v:/g/personal/rohit_sharma_fexle_com/IQCdXOl2m4AzS7JNU25VoSNsAfugfAjEn_s7bkbUo1osVEk?e=9wSi2y' },
-            { id: 'af-10-sales', organization: 'Copeland', category: 'Sales Agent', industry: 'Manufacturing', purpose: 'AI Lead Gen (Sales)', useCase: 'Event card scanning to Salesforce Lead creation with duplicate logic.', highlights: ['Card scanning', 'Duplicate logic'], folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgBleeiPex7cT486ugid5PP1AewXLZFKG1T50seGFlTZ0Us?e=oDloJB', pptUrl: 'https://xoriant-my.sharepoint.com/:p:/g/personal/rohit_sharma_fexle_com/IQAJ4Ld0xGFfRJC4lSbB7XGsATpTO1Apgn8pszLfxcG_s9g?e=YLRX6c' },
-            { id: 'af-11-sales', organization: 'APF', category: 'Sales Agent', industry: 'Automobile', purpose: 'AutoAcquire Acquisition', useCase: 'ROI gap analysis identifying $675k annual profit opportunities.', highlights: ['ROI gap analysis', 'Dealer profiling'], folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgCeJDoUqd5RSpBCxteS7bTkAZkOOyq9vEyWQEIaKIKPEfo?e=9HNBkF' },
-            { id: 'af-12-sales', organization: 'KPMG', category: 'Sales Agent', industry: 'Banking & Finance', purpose: 'Asset Mind Advisor', useCase: 'Market trend analysis for portfolio diversification and risk shifts.', highlights: ['Trend analysis', 'Risk alerts'], folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgAG5PVGeQ4qRKzdWlItUP5JAXbBJOP2EW8zqqwyWJwiR5g?e=QfjXSg' },
+            // MANUFACTURING
+            { id: 'af-siemens-serv', organization: 'Siemens', category: 'Service Agent', industry: 'Manufacturing', purpose: 'L1 Support Excellence', useCase: 'Automating technical resolution drafting and triage automation using tone detection and historical resolution grounding.', status: 'Deployed', demoUrl: 'https://xoriant-my.sharepoint.com/:v:/g/personal/rohit_sharma_fexle_com/IQCk_TJCVjZESpQyOBrN5X6rAYh166zTfVKFSkEUxFyJLJ4?e=wpdc5B', pptUrl: 'https://xoriant-my.sharepoint.com/:p:/g/personal/rohit_sharma_fexle_com/IQDRBa3uDGT4RJR34ewloQ4jAbTLANQLFIcZA67xGNrnkaY?e=9n9fPJ', folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgCF2XVJzHaJQZhwIm0hQBZEAds1j-W_Bht31S7fKJJiflY?e=ageo29' },
+            { id: 'af-siemens-sales', organization: 'Siemens', category: 'Sales Agent', industry: 'Manufacturing', purpose: 'Sales Intel Snapshots', useCase: 'Strategic snapshots for SDRs and Managers to identify hygiene issues and strategic moves within the pipeline.', status: 'Deployed', demoUrl: 'https://xoriant-my.sharepoint.com/:v:/g/personal/rohit_sharma_fexle_com/IQCdXOl2m4AzS7JNU25VoSNsAfugfAjEn_s7bkbUo1osVEk?e=9wSi2y', folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgCF2XVJzHaJQZhwIm0hQBZEAds1j-W_Bht31S7fKJJiflY?e=ageo29' },
+            { id: 'af-carrier', organization: 'Carrier', category: 'Service Agent', industry: 'Manufacturing', purpose: 'Case Summarization', useCase: 'Reducing triage time by 80% through historical resolution grounding and precise case summaries for technicians.', status: 'Deployed', folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgAktQy4CM1gTp4ct5i0ytUhAXZ_cxDACIEwG33fxpKzudk?e=sRxbzI' },
+            { id: 'af-copeland-sales', organization: 'Copeland', category: 'Sales Agent', industry: 'Manufacturing', purpose: 'AI Lead Gen', useCase: 'Autonomous business card scanning to Salesforce Lead creation with duplicate logic and high-velocity sync.', status: 'POC', pptUrl: 'https://xoriant-my.sharepoint.com/:p:/g/personal/rohit_sharma_fexle_com/IQAJ4Ld0xGFfRJC4lSbB7XGsATpTO1Apgn8pszLfxcG_s9g?e=YLRX6c', folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgBleeiPex7cT486ugid5PP1AewXLZFKG1T50seGFlTZ0Us?e=oDloJB' },
 
-            // INTERNAL AGENTS
-            { id: 'af-12-int', organization: 'Xoriant / EAB', category: 'Internal Agent', industry: 'Prof Services', purpose: 'User Intel Lifecycle', useCase: '93% effort reduction in user cloning, creation, and deactivation.', highlights: ['User cloning', 'Permissions'], folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgBqszEocKuUTp4HqG4QZG5WAUeVJA93VUUjxzVl0ABOMtY?e=s5pMeD', demoUrl: 'https://xoriant-my.sharepoint.com/:v:/g/personal/rohit_sharma_fexle_com/IQD1oj71AA_RSoTWkiSSH6hqAZpALWqbgGiQcLiy25-Urk0?e=wlsnFs', pptUrl: 'https://xoriant-my.sharepoint.com/:p:/g/personal/rohit_sharma_fexle_com/IQB4UxR1t5OVQoT5bvWfIwNkAcMDqiSvGTVEGw6iKhvBzbw?e=vJOczW' },
-            { id: 'af-13-int', organization: 'KPMG', category: 'Internal Agent', industry: 'Prof Services', purpose: 'Renewals Management', useCase: 'Monitoring mining license deadlines and compliance verification.', highlights: ['Deadline monitoring', 'Compliance sync'], folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgAG5PVGeQ4qRKzdWlItUP5JAXbBJOP2EW8zqqwyWJwiR5g?e=081VD4' },
-            { id: 'af-14-int', organization: 'Invitation Homes', category: 'Internal Agent', industry: 'Real Estate', purpose: 'Admin Lifecycle', useCase: 'Automated co-signer addition and routine maintenance coordination.', highlights: ['Lease renewal', 'Co-signer logic'], folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgBRdufIJzSaRav3Zd0rSXk6Acb01HD3axcl9tGDNxLfzN8?e=c6wLWe' }
+            // AUTOMOBILE
+            { id: 'af-assurant-serv', organization: 'Assurant', category: 'Service Agent', industry: 'Automobile', purpose: 'Claims Transformation', useCase: 'Converting unstructured handwritten repair orders into high-accuracy claim data using OCR and AI fuzzy mapping.', status: 'Deployed', folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgBjhCMlM_UtR6KYsuQPawbCAc7U8aPoTReh_UXoFZ31460?e=MlCezS' },
+            { id: 'af-ford', organization: 'Ford MSX', category: 'Service Agent', industry: 'Automobile', purpose: 'Repair Order Automation', useCase: 'End-to-end RO filing, intelligent service estimations, and appointment scheduling with real-time discounting logic.', status: 'Deployed', folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgBLTKp8en-fT7IrjwFt5KJrAc--2TND6yNE77-9Be1auds?e=zqzKwO' },
+            { id: 'af-apf', organization: 'APF', category: 'Sales Agent', industry: 'Automobile', purpose: 'AutoAcquire Acquisition', useCase: 'Identifying $675k annual profit opportunities through bespoke ROI gap analysis and personalized prospect outreach.', status: 'Deployed', folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgCeJDoUqd5RSpBCxteS7bTkAZkOOyq9vEyWQEIaKIKPEfo?e=9HNBkF' },
+
+            // RETAIL
+            { id: 'af-walmart', organization: 'Walmart', category: 'Service Agent', industry: 'Retail', purpose: 'ServiceSync', useCase: 'Omni-channel complaint tracking and store discovery engine designed to enhance member satisfaction and SLA compliance.', status: 'Deployed', folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgDqTFMnEszbSpTDzWqX5bBCAbs9N8hu0qPGPW6fkgI29rs?e=c45iHM' },
+            { id: 'af-neiman', organization: 'Neiman Marcus', category: 'Commerce Agent', industry: 'Retail', purpose: 'ShopSmart Assistant', useCase: 'Personalized color/sizing guides and headless cart management for frictionless high-end commerce experiences.', status: 'Deployed', folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgBqQK9Lm4yVQ65lCuNDPfHnAaEMpdaAmTql40wbzjr8kPk?e=zeHQcH' },
+            { id: 'af-costco', organization: 'Costco', category: 'Commerce Agent', industry: 'Retail', purpose: 'Membership Concierge', useCase: 'Automated renewal assistance, enrollment guidance, and promo discovery for warehouse members.', status: 'Deployed', folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgBLq5An3YCCQZxeBrkOeufBAaiX9ypQM6F_L4DVFo3ZFYc?e=Xwgj3v' },
+            { id: 'af-ecom', organization: 'AgentEcom', category: 'Commerce Agent', industry: 'Retail', purpose: 'Order Automation', useCase: 'Weekly partner tracking and modification management for high-volume B2B e-commerce cycles.', status: 'Deployed', folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgAAD0s3WnL4TqhqGpZs1sO5AXv8qCSuP0tQcWlei9KRj1I?e=zcfxuj' },
+
+            // PROF SERVICES & TELECOM
+            { id: 'af-eab', organization: 'Xoriant / EAB', category: 'Internal Agent', industry: 'Prof Services', purpose: 'User Intel Lifecycle', useCase: '93% manual effort reduction in user cloning, creation, and deactivation lifecycles with strict permission audit trails.', status: 'Live', demoUrl: 'https://xoriant-my.sharepoint.com/:v:/g/personal/rohit_sharma_fexle_com/IQD1oj71AA_RSoTWkiSSH6hqAZpALWqbgGiQcLiy25-Urk0?e=wlsnFs', pptUrl: 'https://xoriant-my.sharepoint.com/:p:/g/personal/rohit_sharma_fexle_com/IQB4UxR1t5OVQoT5bvWfIwNkAcMDqiSvGTVEGw6iKhvBzbw?e=vJOczW', folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgBqszEocKuUTp4HqG4QZG5WAUeVJA93VUUjxzVl0ABOMtY?e=s5pMeD' },
+            { id: 'af-kpmg-int', organization: 'KPMG', category: 'Internal Agent', industry: 'Prof Services', purpose: 'Renewals Compliance', useCase: 'Automated mining license deadline monitoring and regulatory compliance verification bot.', status: 'Deployed', folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgAG5PVGeQ4qRKzdWlItUP5JAXbBJOP2EW8zqqwyWJwiR5g?e=081VD4' },
+            { id: 'af-cisco', organization: 'Cisco', category: 'Service Agent', industry: 'Telecom', purpose: 'Field Troubleshooting', useCase: 'Step-by-step device connectivity guides and field-agent visibility for regional service centers.', status: 'Deployed', folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgCvdKXY2_MXRpS3hoDyYWieARsVFtIa3Hi8bFKuYr3vUxQ?e=7Zqkes' },
+
+            // REAL ESTATE
+            { id: 'af-inv-int', organization: 'Invitation Homes', category: 'Internal Agent', industry: 'Real Estate', purpose: 'Lease Admin Lifecycle', useCase: 'Autonomous co-signer addition, maintenance logic orchestration, and renewal admin lifecycles.', status: 'Deployed', folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgBRdufIJzSaRav3Zd0rSXk6Acb01HD3axcl9tGDNxLfzN8?e=c6wLWe' },
+            { id: 'af-inv-serv', organization: 'Invitation Homes', category: 'Service Agent', industry: 'Real Estate', purpose: 'Tenant Services', useCase: 'Automated site visit booking and floor plan delivery for prospective tenants.', status: 'Deployed', folderUrl: 'https://xoriant-my.sharepoint.com/:f:/g/personal/rohit_sharma_fexle_com/IgBRdufIJzSaRav3Zd0rSXk6Acb01HD3axcl9tGDNxLfzN8?e=c6wLWe' }
         ];
 
         const AI_CAPABILITY_DATA = [
-            { id: 'ai-claims', capabilityName: 'Frictionless Claims Transformation', category: 'AI Automation', organization: 'Assurant', industry: 'Insurance', description: 'Multi-channel AI ingestion (SMS/Email) using Azure Doc Intelligence & GPT-4o to automate handwritten RO data extraction.', highlights: ['70% Reduced AHT', '$100K+ Annual Savings'], tech: ['Azure OCR', 'GPT-4o', 'Service Cloud'], status: 'Live', demoUrl: 'https://xoriant-my.sharepoint.com/:v:/g/personal/rohit_sharma_fexle_com/IQAKaSwXUo55TJrqvn2B3tcJARriOkI6VyIQTOMI4DUMgg0?e=ZwIhRA', pptUrl: 'https://xoriant-my.sharepoint.com/:p:/g/personal/rohit_sharma_fexle_com/IQA-904hTYYjTaDOLoiTbQFxAVJlhSTt-5skTpgmLiS2vz4?e=39WRgg' },
-            { id: 'ai-vuln', capabilityName: 'AI-Driven Vulnerability Scanning', category: 'DevSecOps', organization: 'Assurant', industry: 'Cybersecurity', description: 'Dual AI strategy (Azure OpenAI + GitHub Copilot) for automated remediation of Salesforce ATHR security vulnerabilities.', highlights: ['1650+ Fixes Deployed', '85% Efficiency Gain'], tech: ['GPT-4o', 'PMD Engine', 'Python'], status: 'Live', pptUrl: 'https://xoriant-my.sharepoint.com/:p:/g/personal/rohit_sharma_fexle_com/IQB00qJ8TaBTT4eDaEa25gSCAQXfIJyEWaAl10vRKy6TTmM?e=C20dNs' },
-            { id: 'ai-pharma', capabilityName: 'E-pulse Pharma Assistant', category: 'Healthcare AI', organization: 'Health Labs', industry: 'Pharma / Medical', description: 'Intelligent clinical assistant for clinicians to summarize complex medical imaging (X-rays/MRIs) and patient reports using RAG.', highlights: ['Gemini Vision Analysis', '90% Summary Accuracy'], tech: ['Google Gemini Pro', 'Pinecone DB', 'React'], status: 'Live Beta', pptUrl: 'https://xoriant-my.sharepoint.com/:w:/g/personal/rohit_sharma_fexle_com/IQATeGXg1USGT5lW7wqufTZlAX13sbZ5JK0uPCKoPk5gkCs?e=ybgoOW' },
-            { id: 'ai-vibecoding', capabilityName: 'Vibe Coding Suite', category: 'GenAI for Devs', industry: 'Cross-Industry', description: 'Next-gen natural language coding workflow leveraging Cursor and Agentforce for Developers for line-by-line logic orchestration.', highlights: ['Natural Language suggest', 'Unit Test Auto-gen'], tech: ['Cursor', 'Agentforce for Devs', 'VS Code'], status: 'Active' },
-            { id: 'ai-1', capabilityName: 'Audio & Video Intelligence', category: 'Generative AI Solutions', organization: 'Xoriant CoE', industry: 'Cross-Industry', description: 'Multi-modal conversational analysis converting meetings into actionable data structures.', highlights: ['Meeting summarization', 'Action items'], tech: ['Whisper v3', 'GPT-4o'], status: 'Live Beta' }
+            { id: 'ai-claims', capabilityName: 'Claims Transformation', category: 'AI Automation', organization: 'Assurant', industry: 'Insurance', description: 'Transforming auto claims using Azure Document Intelligence and GPT-4o for frictionless extraction of handwritten repair orders.', status: 'Live', demoUrl: 'https://xoriant-my.sharepoint.com/:v:/g/personal/rohit_sharma_fexle_com/IQAKaSwXUo55TJrqvn2B3tcJARriOkI6VyIQTOMI4DUMgg0?e=ZwIhRA', pptUrl: 'https://xoriant-my.sharepoint.com/:p:/g/personal/rohit_sharma_fexle_com/IQA-904hTYYjTaDOLoiTbQFxAVJlhSTt-5skTpgmLiS2vz4?e=39WRgg', tech: ['Azure OCR', 'GPT-4o'], highlights: ['70% Reduced AHT', '$100k savings'] },
+            { id: 'ai-vuln', capabilityName: 'AI Driven Vulnerability Scanning', category: 'Security', organization: 'Strategic IT', industry: 'Cybersecurity', description: 'Dual AI remediation strategy fixing 1650+ security vulnerabilities with 85% manual effort reduction via Azure OpenAI and Copilot.', status: 'Live', pptUrl: 'https://xoriant-my.sharepoint.com/:p:/g/personal/rohit_sharma_fexle_com/IQB00qJ8TaBTT4eDaEa25gSCAQXfIJyEWaAl10vRKy6TTmM?e=C20dNs', tech: ['GitHub Copilot', 'GPT-4o'], highlights: ['1650+ Fixes', '85% Efficiency'] },
+            { id: 'ai-pharma', capabilityName: 'E-pulse Pharma Assistant', category: 'Healthcare', industry: 'Pharma', description: 'Intelligent clinical assistant for clinicians to summarize complex medical imaging (X-rays/MRIs) using Gemini RAG pipelines.', status: 'Live Beta', pptUrl: 'https://xoriant-my.sharepoint.com/:w:/g/personal/rohit_sharma_fexle_com/IQATeGXg1USGT5lW7wqufTZlAX13sbZ5JK0uPCKoPk5gkCs?e=ybgoOW', tech: ['Gemini Pro/Vision', 'Pinecone DB'], highlights: ['90% Summary Accuracy'] },
+            { id: 'ai-vibecoding', capabilityName: 'Vibe Coding', category: 'GenAI Dev', industry: 'Cross-Industry', description: 'Natural language orchestrated development workflow leveraging Cursor and Agentforce for line-by-line logic creation.', status: 'Live', tech: ['Cursor', 'Agentforce for Devs'], highlights: ['30% Velocity Gain'] }
         ];
 
-        // --- PAGE LOGIC ---
-        function showPage(pageId) {
+        // --- CORE UI LOGIC ---
+
+        function toggleAgentSubView(view) {
+            const reg = document.getElementById('af-register-view');
+            const proc = document.getElementById('af-process-view');
+            const btnReg = document.getElementById('btn-af-register');
+            const btnProc = document.getElementById('btn-af-process');
+            if (view === 'register') {
+                reg.classList.remove('hidden'); proc.classList.add('hidden');
+                btnReg.className = "px-6 py-2 rounded-xl text-xs font-black uppercase tracking-widest bg-white shadow-sm text-slate-900";
+                btnProc.className = "px-6 py-2 rounded-xl text-xs font-black uppercase tracking-widest text-slate-400";
+            } else {
+                reg.classList.add('hidden'); proc.classList.remove('hidden');
+                btnProc.className = "px-6 py-2 rounded-xl text-xs font-black uppercase tracking-widest bg-white shadow-sm text-slate-900";
+                btnReg.className = "px-6 py-2 rounded-xl text-xs font-black uppercase tracking-widest text-slate-400";
+            }
+        }
+
+        function toggleAiSubView(view) {
+            const reg = document.getElementById('ai-register-view');
+            const play = document.getElementById('ai-playbook-view');
+            const btnReg = document.getElementById('btn-ai-register');
+            const btnPlay = document.getElementById('btn-ai-playbook');
+            if (view === 'register') {
+                reg.classList.remove('hidden'); play.classList.add('hidden');
+                btnReg.className = "px-6 py-2 rounded-xl text-xs font-black uppercase tracking-widest bg-white shadow-sm text-slate-900";
+                btnPlay.className = "px-6 py-2 rounded-xl text-xs font-black uppercase tracking-widest text-slate-400";
+            } else {
+                reg.classList.add('hidden'); play.classList.remove('hidden');
+                btnPlay.className = "px-6 py-2 rounded-xl text-xs font-black uppercase tracking-widest bg-white shadow-sm text-slate-900";
+                btnReg.className = "px-6 py-2 rounded-xl text-xs font-black uppercase tracking-widest text-slate-400";
+            }
+        }
+
+        function showPage(id) {
             document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
-            document.getElementById(`page-${pageId}`).classList.add('active');
+            document.getElementById(`page-${id}`).classList.add('active');
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active-nav'));
-            const navBtn = document.getElementById(`nav-${pageId}`);
-            if (navBtn) navBtn.classList.add('active-nav');
+            const btn = document.getElementById(`nav-${id}`);
+            if (btn) btn.classList.add('active-nav');
             document.getElementById('mobile-menu').classList.add('hidden');
-            window.scrollTo(0, 0);
+            window.scrollTo(0,0);
         }
 
         function showView(viewId) {
             document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
-            document.getElementById(viewId).classList.add('active');
+            const target = document.getElementById(viewId);
+            if (target) target.classList.add('active');
+
             const isAgent = viewId === 'agent-view';
-            document.getElementById('btn-agent-view').className = isAgent ? 'px-8 py-3 rounded-2xl font-black text-xs uppercase tracking-widest transition-all bg-slate-900 text-white shadow-xl' : 'px-8 py-3 rounded-2xl font-black text-xs uppercase tracking-widest transition-all bg-white text-slate-400 border border-slate-100';
-            document.getElementById('btn-industry-view').className = !isAgent ? 'px-8 py-3 rounded-2xl font-black text-xs uppercase tracking-widest transition-all bg-slate-900 text-white shadow-xl' : 'px-8 py-3 rounded-2xl font-black text-xs uppercase tracking-widest transition-all bg-white text-slate-400 border border-slate-100';
+            const btnAgent = document.getElementById('btn-agent-view');
+            const btnIndustry = document.getElementById('btn-industry-view');
+            
+            if (btnAgent && btnIndustry) {
+                btnAgent.className = isAgent ? 'px-8 py-3 rounded-2xl font-black text-xs uppercase tracking-widest transition-all bg-slate-900 text-white shadow-xl' : 'px-8 py-3 rounded-2xl font-black text-xs uppercase tracking-widest transition-all bg-white text-slate-400 border border-slate-100';
+                btnIndustry.className = !isAgent ? 'px-8 py-3 rounded-2xl font-black text-xs uppercase tracking-widest transition-all bg-slate-900 text-white shadow-xl' : 'px-8 py-3 rounded-2xl font-black text-xs uppercase tracking-widest transition-all bg-white text-slate-400 border border-slate-100';
+            }
         }
 
-        function scrollToElement(id) {
-            const el = document.getElementById(id);
-            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-
-        // --- RENDERERS ---
         function renderAgentTables() {
             const categories = [
                 { name: 'Service Agent', id: 'service-sec', color: 'sky-600', icon: 'fa-headset' },
                 { name: 'Sales Agent', id: 'sales-sec', color: 'indigo-600', icon: 'fa-chart-line' },
-                { name: 'Internal Agent', id: 'internal-sec', color: 'rose-600', icon: 'fa-user-shield' }
+                { name: 'Internal Agent', id: 'internal-sec', color: 'rose-600', icon: 'fa-user-shield' },
+                { name: 'Commerce Agent', id: 'commerce-sec', color: 'emerald-600', icon: 'fa-shopping-cart' }
             ];
-
             const container = document.getElementById('tables-container');
+            if (!container) return;
             container.innerHTML = categories.map(cat => {
                 const items = AGENTFORCE_DATA.filter(d => d.category === cat.name);
                 return `
-                    <section id="${cat.id}" class="space-y-6 p-4 rounded-3xl">
-                        <h4 class="text-xl font-black text-${cat.color} flex items-center gap-3">
-                            <i class="fas ${cat.icon}"></i> ${cat.name} Portfolio
-                        </h4>
-                        <div class="bg-white rounded-[32px] overflow-hidden border border-slate-100 shadow-sm">
-                            <div class="overflow-x-auto">
-                                <table class="w-full text-left min-w-[800px]">
-                                    <thead class="bg-slate-900 text-white text-[10px] font-black uppercase tracking-widest">
-                                        <tr>
-                                            <th class="px-8 py-4">Client / Org</th>
-                                            <th class="px-8 py-4">Brief</th>
-                                            <th class="px-8 py-4">Logic</th>
-                                            <th class="px-8 py-4 text-center">Resources</th>
+                    <section id="${cat.id}" class="space-y-6">
+                        <h4 class="text-xl font-black text-${cat.color} flex items-center gap-3"><i class="fas ${cat.icon}"></i> ${cat.name} Portfolio</h4>
+                        <div class="bg-white rounded-[32px] overflow-hidden border border-slate-100 shadow-sm overflow-x-auto">
+                            <table class="w-full text-left min-w-[800px]">
+                                <thead class="bg-slate-900 text-white text-[10px] font-black uppercase tracking-widest">
+                                    <tr><th class="px-8 py-4">Client</th><th class="px-8 py-4">Solution Brief</th><th class="px-8 py-4 text-center">Status</th><th class="px-8 py-4 text-center">Assets</th></tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100">
+                                    ${items.map(d => `
+                                        <tr class="hover:bg-slate-50 transition-colors">
+                                            <td class="px-8 py-5 font-black text-slate-900 text-sm">${d.organization}</td>
+                                            <td class="px-8 py-5 text-sm text-slate-600 font-medium">${d.purpose}</td>
+                                            <td class="px-8 py-5 text-center">
+                                                <span class="px-3 py-1 rounded-full text-[9px] font-black uppercase border ${d.status === 'Live' ? 'bg-emerald-50 text-emerald-600 border-emerald-100 live-pulse' : 'bg-slate-50 text-slate-400 border-slate-200'}">${d.status}</span>
+                                            </td>
+                                            <td class="px-8 py-5"><div class="flex justify-center gap-2">
+                                                ${d.demoUrl && d.demoUrl !== '#' ? `<a href="${d.demoUrl}" target="_blank" class="action-btn btn-demo"><i class="fas fa-play text-[10px]"></i></a>` : ''}
+                                                ${d.pptUrl && d.pptUrl !== '#' ? `<a href="${d.pptUrl}" target="_blank" class="action-btn btn-ppt"><i class="fas fa-file-powerpoint text-[10px]"></i></a>` : ''}
+                                                ${d.folderUrl && d.folderUrl !== '#' ? `<a href="${d.folderUrl}" target="_blank" class="action-btn btn-folder"><i class="fas fa-folder-open text-[10px]"></i></a>` : ''}
+                                            </div></td>
                                         </tr>
-                                    </thead>
-                                    <tbody class="divide-y divide-slate-100">
-                                        ${items.map(d => `
-                                            <tr class="hover:bg-slate-50 transition-colors">
-                                                <td class="px-8 py-5 font-black text-slate-900 text-sm">${d.organization}</td>
-                                                <td class="px-8 py-5 text-sm text-slate-600 font-bold">${d.purpose}</td>
-                                                <td class="px-8 py-5 text-sm text-slate-500">${d.useCase}</td>
-                                                <td class="px-8 py-5">
-                                                    <div class="flex justify-center gap-2">
-                                                        ${d.demoUrl && d.demoUrl !== '#' ? `<a href="${d.demoUrl}" target="_blank" class="action-btn btn-demo" title="Watch Demo"><i class="fas fa-play text-xs"></i></a>` : ''}
-                                                        ${d.pptUrl && d.pptUrl !== '#' ? `<a href="${d.pptUrl}" target="_blank" class="action-btn btn-ppt" title="View Deck"><i class="fas fa-file-powerpoint text-xs"></i></a>` : ''}
-                                                        ${d.folderUrl && d.folderUrl !== '#' ? `<a href="${d.folderUrl}" target="_blank" class="action-btn btn-folder" title="Access Folder"><i class="fas fa-folder-open text-xs"></i></a>` : ''}
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        `).join('')}
-                                    </tbody>
-                                </table>
-                            </div>
+                                    `).join('')}
+                                </tbody>
+                            </table>
                         </div>
                     </section>
                 `;
@@ -343,36 +561,35 @@
 
         function renderIndustryCards() {
             const container = document.getElementById('industry-cards-container');
-            const inds = ["Healthcare", "Banking & Finance", "Manufacturing", "Automobile", "Retail", "Prof Services", "Real Estate"];
+            if (!container) return;
+            const inds = ["Healthcare", "Banking & Finance", "Manufacturing", "Automobile", "Retail", "Prof Services", "Real Estate", "Telecom"];
             container.innerHTML = inds.map(ind => {
                 const items = AGENTFORCE_DATA.filter(d => d.industry.toLowerCase().includes(ind.toLowerCase().split(' ')[0]));
+                if (items.length === 0) return '';
                 return `
-                    <div id="ind-${ind.toLowerCase().split(' ')[0]}" class="bg-white/70 backdrop-blur-xl p-8 rounded-[40px] border-l-8 border-slate-900 border-t border-r border-b border-slate-100 shadow-sm hover:shadow-xl transition-all">
+                    <div class="bg-white p-8 rounded-[40px] border-l-8 border-slate-900 border-t border-r border-b border-slate-100 shadow-sm flex flex-col h-full">
                         <div class="flex justify-between items-center mb-8">
-                            <h4 class="text-xl font-black uppercase tracking-tighter">${ind}</h4>
-                            <span class="bg-slate-100 text-slate-500 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">${items.length} Projects</span>
+                            <h4 class="text-xl font-black uppercase tracking-widest">${ind}</h4>
+                            <span class="bg-slate-100 text-slate-500 px-3 py-1 rounded-full text-[9px] font-black uppercase">${items.length} Use Cases</span>
                         </div>
-                        <div class="space-y-4">
+                        <div class="space-y-4 flex-grow">
                             ${items.map(item => `
-                                <div class="p-5 rounded-2xl border border-slate-50 transition-all hover:translate-x-1 ${
-                                    item.category === 'Service Agent' ? 'bg-sky-50/50' : 
-                                    item.category === 'Sales Agent' ? 'bg-indigo-50/50' : 'bg-rose-50/50'
-                                }">
+                                <div class="p-5 rounded-2xl border border-slate-50 bg-slate-50/30">
                                     <div class="flex justify-between items-start mb-2">
-                                        <div>
-                                            <p class="text-[9px] font-black uppercase tracking-widest ${
-                                                item.category === 'Service Agent' ? 'text-sky-600' : 
-                                                item.category === 'Sales Agent' ? 'text-indigo-600' : 'text-rose-600'
-                                            }">${item.organization}</p>
+                                        <div class="flex flex-col gap-0.5">
+                                            <div class="flex items-center gap-2">
+                                                <p class="text-[9px] font-black uppercase text-slate-400">${item.organization} (${item.category.split(' ')[0]})</p>
+                                                ${item.status === 'Live' ? '<span class="px-1.5 py-0.5 rounded-full bg-emerald-50 text-emerald-600 text-[7px] font-black uppercase border border-emerald-100 live-pulse">Live</span>' : ''}
+                                            </div>
                                             <p class="text-sm font-black text-slate-800">${item.purpose}</p>
                                         </div>
                                         <div class="flex gap-2">
-                                            ${item.demoUrl && item.demoUrl !== '#' ? `<a href="${item.demoUrl}" target="_blank" class="text-blue-500 hover:scale-110"><i class="fas fa-play-circle text-lg"></i></a>` : ''}
-                                            ${item.pptUrl && item.pptUrl !== '#' ? `<a href="${item.pptUrl}" target="_blank" class="text-orange-500 hover:scale-110"><i class="fas fa-file-powerpoint text-lg"></i></a>` : ''}
-                                            <a href="${item.folderUrl}" target="_blank" class="text-slate-400 hover:text-slate-900"><i class="fas fa-external-link-alt text-lg"></i></a>
+                                            ${item.demoUrl && item.demoUrl !== '#' ? `<a href="${item.demoUrl}" target="_blank" class="text-blue-500 hover:scale-110 transition-transform"><i class="fas fa-play-circle text-lg"></i></a>` : ''}
+                                            ${item.pptUrl && item.pptUrl !== '#' ? `<a href="${item.pptUrl}" target="_blank" class="text-orange-500 hover:scale-110 transition-transform"><i class="fas fa-file-powerpoint text-lg"></i></a>` : ''}
+                                            ${item.folderUrl && item.folderUrl !== '#' ? `<a href="${item.folderUrl}" target="_blank" class="text-slate-400 hover:text-slate-900 transition-transform"><i class="fas fa-external-link-alt text-lg"></i></a>` : ''}
                                         </div>
                                     </div>
-                                    <p class="text-xs text-slate-500 leading-relaxed font-medium">${item.useCase}</p>
+                                    <p class="text-[11px] text-slate-500 leading-tight">${item.useCase}</p>
                                 </div>
                             `).join('')}
                         </div>
@@ -381,48 +598,34 @@
             }).join('');
         }
 
-        function renderAiCards() {
-            const container = document.getElementById('ai-cards-container');
+        function renderAiPortfolio() {
+            const container = document.getElementById('ai-register-view');
+            if (!container) return;
             container.innerHTML = AI_CAPABILITY_DATA.map(item => `
                 <div class="bg-white p-10 rounded-[40px] border border-slate-100 shadow-sm flex flex-col relative overflow-hidden bento-card">
-                    <div class="flex justify-between items-start mb-8">
-                        <div>
-                            <h3 class="text-2xl font-black text-slate-900">${item.capabilityName}</h3>
-                            <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-1">${item.industry}</p>
-                        </div>
-                        <div class="flex flex-col items-end gap-2">
-                            <div class="px-3 py-1 rounded-lg bg-slate-900 text-white text-[9px] font-black uppercase tracking-widest">${item.status}</div>
-                            <div class="flex gap-2">
-                                ${item.demoUrl ? `<a href="${item.demoUrl}" target="_blank" class="action-btn btn-demo text-[8px] px-2 py-1"><i class="fas fa-play mr-1"></i> Demo</a>` : ''}
-                                ${item.pptUrl ? `<a href="${item.pptUrl}" target="_blank" class="action-btn btn-ppt text-[8px] px-2 py-1"><i class="fas fa-file mr-1"></i> View ${item.capabilityName === 'E-pulse Pharma Assistant' ? 'Doc' : 'Deck'}</a>` : ''}
-                            </div>
-                        </div>
+                    <div class="flex justify-between items-start mb-6">
+                        <div><h3 class="text-2xl font-black text-slate-900">${item.capabilityName}</h3><p class="text-[10px] font-black text-slate-400 uppercase mt-1 tracking-widest">${item.industry}</p></div>
+                        <div class="px-3 py-1 rounded-lg ${item.status.includes('Live') ? 'bg-emerald-50 text-emerald-600 border border-emerald-100 live-pulse' : 'bg-slate-900 text-white'} text-[9px] font-black uppercase tracking-widest">${item.status}</div>
                     </div>
-                    <p class="text-slate-600 font-medium mb-8 leading-relaxed">${item.description}</p>
-                    <div class="space-y-4">
-                        <div>
-                            <p class="text-[9px] font-black uppercase text-slate-400 tracking-widest mb-2">Technical Highlights</p>
-                            <div class="flex flex-wrap gap-2">
-                                ${item.tech.map(t => `<span class="px-3 py-1 bg-slate-50 rounded-xl text-xs font-bold text-slate-500 border border-slate-100">${t}</span>`).join('')}
-                            </div>
-                        </div>
-                        <div>
-                            <p class="text-[9px] font-black uppercase text-slate-400 tracking-widest mb-2">Business Impact</p>
-                            <div class="flex flex-wrap gap-2">
-                                ${item.highlights.map(h => `<span class="px-3 py-1 bg-blue-50 text-[#00A1E0] rounded-xl text-[10px] font-bold">${h}</span>`).join('')}
-                            </div>
-                        </div>
+                    <p class="text-slate-600 font-medium mb-8 leading-relaxed text-sm">${item.description}</p>
+                    <div class="flex flex-wrap gap-2 mb-8">
+                        ${item.tech.map(t => `<span class="px-3 py-1 bg-slate-50 rounded-xl text-[10px] font-bold text-slate-500 border border-slate-100">${t}</span>`).join('')}
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 mt-auto">
+                        ${item.demoUrl ? `<a href="${item.demoUrl}" target="_blank" class="action-btn btn-demo text-center"><i class="fas fa-play mr-2 text-xs"></i> Launch Demo</a>` : '<div class="opacity-30 action-btn bg-slate-50 text-slate-400 border-none cursor-not-allowed text-[10px] uppercase font-black text-center">Demo Ready Soon</div>'}
+                        ${item.pptUrl ? `<a href="${item.pptUrl}" target="_blank" class="action-btn btn-ppt text-center"><i class="fas fa-file-alt mr-2 text-xs"></i> ${item.capabilityName.includes('Pharma') ? 'Clinical Doc' : 'Executive Deck'}</a>` : '<div class="opacity-30 action-btn bg-slate-50 text-slate-400 border-none cursor-not-allowed text-[10px] uppercase font-black text-center">Artifact Pending</div>'}
                     </div>
                 </div>
             `).join('');
         }
 
-        window.onload = () => { renderAgentTables(); renderIndustryCards(); renderAiCards(); };
+        function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
 
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        }
+        window.onload = () => {
+            renderAgentTables();
+            renderIndustryCards();
+            renderAiPortfolio();
+        };
     </script>
 </body>
 </html>
